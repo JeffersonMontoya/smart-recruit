@@ -2,7 +2,12 @@ import React from 'react';
 import { User, MapPin, Mail, MoreHorizontal, Calendar } from 'lucide-react';
 import { Card } from '../ui/Card';
 
+
+import { useAuth } from '../../context/AuthContext';
+
 export const ProfileCard = () => {
+  const { user } = useAuth();
+  
   return (
     <Card className="relative overflow-hidden group" noPadding>
       {/* Background decoration */}
@@ -25,8 +30,8 @@ export const ProfileCard = () => {
          <div className="flex-1 w-full space-y-6">
             <div className="flex justify-between items-start">
                 <div>
-                   <h2 className="text-3xl font-bold text-white tracking-tight">Cheche Developer</h2>
-                   <p className="text-cyan-400 font-medium">Senior Technical Recruiter</p>
+                   <h2 className="text-3xl font-bold text-white tracking-tight">{user?.nombre}</h2>
+                   <p className="text-cyan-400 font-medium capitalize">{user?.rol || 'Rol no definido'}</p>
                 </div>
                 <button className="p-2 text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-lg transition-all">
                     <MoreHorizontal />
@@ -34,7 +39,7 @@ export const ProfileCard = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-               <InfoItem icon={<Mail size={16} />} label="Email" value="cheche@smartrecruit.io" />
+               <InfoItem icon={<Mail size={16} />} label="Email" value={user?.email || ''} />
                <InfoItem icon={<MapPin size={16} />} label="Base" value="Mexico City (Remote)" />
             </div>
 
