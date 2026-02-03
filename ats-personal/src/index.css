@@ -11,3 +11,13 @@ body {
   background-color: black;
   color: #a1a1aa; /* zinc-400 */
 }
+
+/* Ocultar scrollbar pero permitir scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

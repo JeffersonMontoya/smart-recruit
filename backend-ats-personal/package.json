@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "seed:admin": "ts-node src/seedAdmin.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
+    "nodemailer": "^7.0.13",
     "pg": "^8.18.0",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.28"
@@ -27,6 +29,7 @@
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.1.0",
+    "@types/nodemailer": "^7.0.9",
     "@types/pg": "^8.16.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"

@@ -27,6 +27,22 @@ export const register = async (nombre: string, email: string, password: string) 
     return response.data;
 };
 
+// --- Staff Management (Admin only) ---
+export const getStaff = async () => {
+    const response = await api.get('/users');
+    return response.data;
+};
+
+export const createRecruiter = async (nombre: string, email: string) => {
+    const response = await api.post('/users/recruiter', { nombre, email });
+    return response.data;
+};
+
+export const deleteStaff = async (id: string) => {
+    const response = await api.delete(`/users/${id}`);
+    return response.data;
+};
+
 export const verificarSaludBackend = async () => {
     try {
         const respuesta = await api.get('/health');
