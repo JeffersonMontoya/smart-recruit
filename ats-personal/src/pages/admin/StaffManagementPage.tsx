@@ -1,61 +1,25 @@
-import { useState, useEffect } from "react";
-import MainLayout from "../components/layout/MainLayout";
-import { getStaff, createRecruiter, deleteStaff } from "../services/api";
-import {
-  User,
-  Plus,
-  Trash2,
-  Mail,
-  Shield,
-  UserPlus,
-  Loader2,
-} from "lucide-react";
+import { useState } from "react";
+import MainLayout from "../../components/layout/MainLayout";
+import { useStaff } from "../../hooks/useStaff";
+import { User, Trash2, Mail, UserPlus, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
-import { Card } from "../components/ui/Card";
-
-interface StaffMember {
-  id: string;
-  nombre: string;
-  email: string;
-  rol: string;
-  createdAt: string;
-}
+import { Card } from "../../components/ui/Card";
 
 export const StaffManagementPage = () => {
-  const [staff, setStaff] = useState<StaffMember[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { staff, loading, submitting, inviteRecruiter, removeMember } =
+    useStaff();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newStaff, setNewStaff] = useState({ nombre: "", email: "" });
-  const [submitting, setSubmitting] = useState(false);
-
-  const fetchStaff = async () => {
-    try {
-      const data = await getStaff();
-      setStaff(data);
-    } catch (error) {
-      toast.error("Error al cargar la lista de staff");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchStaff();
-  }, []);
 
   const handleCreateStaff = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitting(true);
     try {
-      await createRecruiter(newStaff.nombre, newStaff.email);
+      await inviteRecruiter(newStaff.nombre, newStaff.email);
       toast.success("Reclutador invitado exitosamente");
       setIsModalOpen(false);
       setNewStaff({ nombre: "", email: "" });
-      fetchStaff();
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Error al crear reclutador");
-    } finally {
-      setSubmitting(false);
     }
   };
 
@@ -64,13 +28,13 @@ export const StaffManagementPage = () => {
       !window.confirm(
         "¿Estás seguro de que deseas eliminar a este miembro del equipo?",
       )
-    )
+    ) {
       return;
+    }
 
     try {
-      await deleteStaff(id);
+      await removeMember(id);
       toast.success("Miembro eliminado");
-      fetchStaff();
     } catch (error) {
       toast.error("Error al eliminar");
     }

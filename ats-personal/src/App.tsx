@@ -5,12 +5,12 @@ import {
   ProtectedRoute,
   PublicRoute,
 } from "./components/layout/ProtectedRoutes";
-import { LoginPage } from "./pages/LoginPage";
-import { RegisterPage } from "./pages/RegisterPage";
+import { LoginPage } from "./pages/auth/LoginPage";
+import { RegisterPage } from "./pages/auth/RegisterPage";
 import MainLayout from "./components/layout/MainLayout";
 import { ProfileCard } from "./components/dashboard/ProfileCard";
 import { StatsGrid } from "./components/dashboard/StatsGrid";
-import { StaffManagementPage } from "./pages/StaffManagementPage";
+import { StaffManagementPage } from "./pages/admin/StaffManagementPage";
 
 // Componente Dashboard existente
 const Dashboard = () => {
