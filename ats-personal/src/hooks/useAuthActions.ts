@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useAuth } from "../context/AuthContext";
-import { login as loginService, register as registerService } from "../services/api";
+import { login as loginService, register as registerService } from "../services/auth.service";
 
 export const useAuthActions = () => {
   const [loading, setLoading] = useState(false);

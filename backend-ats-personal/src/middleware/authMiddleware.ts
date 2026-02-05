@@ -45,3 +45,15 @@ export const admin = (req: any, res: Response, next: NextFunction) => {
         res.status(403).json({ message: 'No autorizado como administrador' });
     }
 };
+
+// Middleware para autorizar múltiples roles
+export const authorize = (...roles: string[]) => {
+    return (req: any, res: Response, next: NextFunction) => {
+        if (!req.user || !roles.includes(req.user.rol)) {
+            return res.status(403).json({ 
+                message: `El rol (${req.user?.rol}) no tiene permiso para acceder a esta ruta` 
+            });
+        }
+        next();
+    };
+};

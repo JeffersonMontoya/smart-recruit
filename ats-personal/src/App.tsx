@@ -11,6 +11,7 @@ import MainLayout from "./components/layout/MainLayout";
 import { ProfileCard } from "./components/dashboard/ProfileCard";
 import { StatsGrid } from "./components/dashboard/StatsGrid";
 import { StaffManagementPage } from "./pages/admin/StaffManagementPage";
+import { VacanciesPage } from "./pages/admin/VacanciesPage";
 
 // Componente Dashboard existente
 const Dashboard = () => {
@@ -59,6 +60,7 @@ const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/staff" element={<StaffManagementPage />} />
+            <Route path="/vacancies" element={<VacanciesPage />} />
             {/* Redirigir la raíz al dashboard */}
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
           </Route>

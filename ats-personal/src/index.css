@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
   --color-zinc-950: #09090b;
@@ -12,12 +12,12 @@ body {
   color: #a1a1aa; /* zinc-400 */
 }
 
-/* Ocultar scrollbar pero permitir scroll */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* Ocultar scrollbar globalmente pero permitir funcionalidad */
+*::-webkit-scrollbar {
+  display: none !important;
 }
 
-.no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+* {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { getStaff, createRecruiter, deleteStaff } from "../services/api";
+import { getStaff, createRecruiter, deleteStaff } from "../services/staff.service";
 
 export interface StaffMember {
   id: string;
