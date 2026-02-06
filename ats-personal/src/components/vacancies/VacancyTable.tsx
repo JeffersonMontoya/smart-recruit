@@ -2,7 +2,7 @@ import {
   MapPin,
   DollarSign,
   UserCheck,
-  Eye,
+  ArrowUpRight,
   MoreVertical,
   Clock,
 } from "lucide-react";
@@ -77,7 +77,7 @@ export const VacancyTable = ({
             <td className="px-6 py-5 text-center">
               <span
                 className={`inline-flex px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-tighter ${
-                  vacancy.estado === "Activa"
+                  vacancy.estado === "Activa" || vacancy.estado === "open"
                     ? "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
                     : "bg-zinc-800 text-zinc-500 border border-zinc-700/50"
                 }`}
@@ -95,10 +95,13 @@ export const VacancyTable = ({
                 </button>
                 <button
                   onClick={() => onViewDetails(vacancy)}
-                  className="p-2 hover:bg-white/5 rounded-lg text-zinc-600 hover:text-white transition-all"
-                  title="Previsualizar"
+                  className="p-2 hover:bg-white/5 rounded-lg text-zinc-600 hover:text-indigo-400 transition-all group"
+                  title="Ver y Postularme"
                 >
-                  <Eye size={16} />
+                  <ArrowUpRight
+                    size={18}
+                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                  />
                 </button>
                 <button className="p-2 hover:bg-white/5 rounded-lg text-zinc-600 hover:text-white transition-all">
                   <MoreVertical size={16} />

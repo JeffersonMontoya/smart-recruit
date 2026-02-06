@@ -12,7 +12,7 @@ import { ProfileCard } from "./components/dashboard/ProfileCard";
 import { StatsGrid } from "./components/dashboard/StatsGrid";
 import { StaffManagementPage } from "./pages/admin/StaffManagementPage";
 import { VacanciesPage } from "./pages/admin/VacanciesPage";
-
+import { ExplorePage } from "./pages/candidate/ExplorePage";
 // Componente Dashboard existente
 const Dashboard = () => {
   const { user } = useAuth();
@@ -24,7 +24,9 @@ const Dashboard = () => {
           <div className="flex justify-between items-end">
             <div>
               <h1 className="text-3xl font-bold text-white mb-1">
-                Dashboard General
+                {user?.rol === "candidate"
+                  ? "Dashboard Candidato"
+                  : "Dashboard General"}
               </h1>
               <p className="text-zinc-500">
                 Bienvenido de vuelta {user?.nombre}, aquí está lo que sucede
@@ -37,7 +39,7 @@ const Dashboard = () => {
           </div>
 
           <ProfileCard />
-          <StatsGrid />
+          {user?.rol !== "candidate" && <StatsGrid />}
         </section>
       </div>
     </MainLayout>
@@ -59,8 +61,16 @@ const App = () => {
           {/* Rutas Privadas (Solo accesibles si SI estás logueado) */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/staff" element={<StaffManagementPage />} />
-            <Route path="/vacancies" element={<VacanciesPage />} />
+                 <Route path="/explore" element={<ExplorePage />} />
+
+            {/* Rutas restrictivas solo para Admin/Recruiter */}
+            <Route
+              element={<ProtectedRoute allowedRoles={["admin", "recruiter"]} />}
+            >
+              <Route path="/staff" element={<StaffManagementPage />} />
+              <Route path="/vacancies" element={<VacanciesPage />} />
+            </Route>
+
             {/* Redirigir la raíz al dashboard */}
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
           </Route>

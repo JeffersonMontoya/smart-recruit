@@ -1,4 +1,10 @@
-import { MapPin, DollarSign, UserCheck, Eye, MoreVertical } from "lucide-react";
+import {
+  MapPin,
+  DollarSign,
+  UserCheck,
+  ArrowUpRight,
+  MoreVertical,
+} from "lucide-react";
 import { Vacancy } from "../../types/vacancy.types";
 import { Card } from "../ui/Card";
 
@@ -21,7 +27,7 @@ export const VacancyCard = ({ vacancy, onViewDetails }: VacancyCardProps) => {
         </div>
         <span
           className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-tighter ${
-            vacancy.estado === "Activa"
+            vacancy.estado === "Activa" || vacancy.estado === "open"
               ? "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
               : "bg-zinc-800 text-zinc-500 border border-zinc-700/50"
           }`}
@@ -49,9 +55,15 @@ export const VacancyCard = ({ vacancy, onViewDetails }: VacancyCardProps) => {
           </button>
           <button
             onClick={() => onViewDetails(vacancy)}
-            className="bg-indigo-500 text-white p-2 rounded-lg transition-all shadow-lg shadow-indigo-500/20"
+            className="flex items-center gap-2 bg-indigo-500 text-white px-4 py-2 rounded-xl transition-all shadow-lg shadow-indigo-600/30 group active:scale-95"
           >
-            <Eye size={16} />
+            <span className="text-[9px] font-black uppercase tracking-tighter">
+              Postularme
+            </span>
+            <ArrowUpRight
+              size={14}
+              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+            />
           </button>
           <button className="bg-white/5 hover:bg-white/10 p-2 rounded-lg text-white transition-all">
             <MoreVertical size={16} />

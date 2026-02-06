@@ -72,20 +72,17 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               {(isAdmin || isRecruiter) && (
                 <>
                   <NavItem
-                    icon={<Users size={20} />}
-                    label="Candidatos"
-                    to="/candidates"
-                  />
-                  <NavItem
                     icon={<Briefcase size={20} />}
                     label="Vacantes"
                     to="/vacancies"
                   />
+
                   <NavItem
-                    icon={<Calendar size={20} />}
-                    label="Entrevistas"
-                    to="/interviews"
+                    icon={<ShieldCheck size={20} />}
+                    label="Gestionar Staff"
+                    to="/staff"
                   />
+
                   <NavItem
                     icon={<BarChart2 size={20} />}
                     label="Métricas"
@@ -116,27 +113,6 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               )}
             </nav>
           </div>
-
-          {/* SECCIÓN 2: ADMINISTRACIÓN (Solo Admins) */}
-          {isAdmin && (
-            <div>
-              <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-4 px-3">
-                Panel de Control
-              </h3>
-              <nav className="space-y-1">
-                <NavItem
-                  icon={<ShieldCheck size={20} />}
-                  label="Gestionar Staff"
-                  to="/staff"
-                />
-                <NavItem
-                  icon={<Settings size={20} />}
-                  label="Configuración Sistema"
-                  to="/settings"
-                />
-              </nav>
-            </div>
-          )}
 
           {/* SECCIÓN 3: SOPORTE Y AJUSTES (Para todos) */}
           <div>

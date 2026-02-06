@@ -18,20 +18,28 @@ export const useVacancies = () => {
   const [loading, setLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const fetchVacancies = async () => {
+  const fetchVacancies = async (isSilent = false) => {
     try {
-      setLoading(true);
+      if (!isSilent) setLoading(true);
       const data = await getJobs();
       setVacancies(data);
     } catch (error) {
       console.error("Error cargando vacantes:", error);
     } finally {
-      setLoading(false);
+      if (!isSilent) setLoading(false);
     }
   };
 
   useEffect(() => {
+    // Carga inicial con spinner
     fetchVacancies();
+    
+    // Polling agresivo y silencioso cada 10 segundos
+    const interval = setInterval(() => {
+      fetchVacancies(true);
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleInputChange = (
@@ -63,7 +71,7 @@ export const useVacancies = () => {
       await createJob(formData);
       toast.success("Vacante publicada con éxito");
       handleResetForm();
-      await fetchVacancies(); // Actualizamos la lista automáticamente
+      await fetchVacancies(true); // Actualizamos silenciosamente
       setViewMode("list");
     } catch (error) {
       toast.error("Error al publicar la vacante");
